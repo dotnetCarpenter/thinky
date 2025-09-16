@@ -96,11 +96,13 @@ describe('save', function() {
       var num = util.random();
 
       doc = new Model({
-        id: str
+        id: str,
+        num: num
       })
       doc.save().then(function(result) {
         doc2 = new Model({
-          id: str
+          id: str,
+          num: num
         })
         doc2.save().then(function(r) {
           done(new Error("Expecting error"))
@@ -113,7 +115,7 @@ describe('save', function() {
       }).error(done);
     });
 
-    it('setSaved should do the same', function(){
+    it('setSaved should fail if the primary key already exists', function(){
       var str = util.s8();
       var num = util.random();
 
@@ -122,7 +124,7 @@ describe('save', function() {
         num: num
       })
       assert.equal(doc.isSaved(), false);
-      assert.equal(doc.setSaved());
+      doc.setSaved();
       assert.equal(doc.isSaved(), true);
     });
 
