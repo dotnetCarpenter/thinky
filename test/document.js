@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require(__dirname+'/../config.js');
 var thinky = require(__dirname+'/../lib/thinky.js')(config);
 var r = thinky.r;
@@ -50,13 +52,13 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
       assert.equal(doc.isSaved(), false);
       doc.save().then(function(result) {
-        assert.equal(doc.isSaved(), true);
+        assert.equal(doc.isSaved(result), true);
         done();
       }).error(done);
     });
@@ -64,7 +66,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: num,
         num: num
       })
@@ -79,7 +81,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -95,16 +97,16 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         id: str,
         num: num
       })
-      doc.save().then(function(result) {
-        doc2 = new Model({
+      doc.save().then(function() {
+        var doc2 = new Model({
           id: str,
           num: num
         })
-        doc2.save().then(function(r) {
+        doc2.save().then(function() {
           done(new Error("Expecting error"))
         }).error(function (err) {
           assert(err instanceof Errors.DuplicatePrimaryKey);
@@ -119,7 +121,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -132,7 +134,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -145,7 +147,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -157,7 +159,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -173,7 +175,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -193,7 +195,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -215,7 +217,7 @@ describe('save', function() {
       var str = util.s8();
       var num = util.random();
 
-      doc = new Model({
+      var doc = new Model({
         str: str,
         num: num
       })
@@ -493,7 +495,7 @@ describe('save', function() {
     });
     it('new should create instances of Document for joined documents too', function() {
       var docValues = {str: util.s8(), num: util.random(), otherDoc: {str: util.s8(), num: util.random()}}
-      doc = new Model(docValues);
+      var doc = new Model(docValues);
       assert.equal(doc._getModel()._name, Model.getTableName())
       assert.equal(doc.otherDoc._getModel()._name, OtherModel.getTableName())
     });
@@ -1542,7 +1544,7 @@ describe('delete', function() {
       var docValues = {str: util.s8(), num: util.random()}
       var otherDocValues = {str: util.s8(), num: util.random()}
 
-      var doc = new Model(docValues);
+      doc = new Model(docValues);
       var otherDoc = new OtherModel(otherDocValues);
       doc.otherDoc = otherDoc;
       doc.saveAll().then(function(doc) {
@@ -3413,7 +3415,6 @@ describe('removeRelation', function(){
       num: Number
     });
 
-    var otherName = util.s8();
     var OtherModel = thinky.createModel(modelNames[1], {
       id: String,
       str: String,
@@ -3425,7 +3426,7 @@ describe('removeRelation', function(){
     var docValues = {str: util.s8(), num: util.random()}
     var otherDocValues = {str: util.s8(), num: util.random()}
 
-    doc = new Model(docValues);
+    var doc = new Model(docValues);
     var otherDoc = new OtherModel(otherDocValues);
     doc.otherDoc = otherDoc;
 
@@ -3446,7 +3447,6 @@ describe('removeRelation', function(){
       num: Number
     });
 
-    var otherName = util.s8();
     var OtherModel = thinky.createModel(modelNames[1], {
       id: String,
       str: String,
@@ -3458,7 +3458,7 @@ describe('removeRelation', function(){
     var docValues = {str: util.s8(), num: util.random()}
     var otherDocValues = {str: util.s8(), num: util.random()}
 
-    doc = new Model(docValues);
+    var doc = new Model(docValues);
     var otherDoc = new OtherModel(otherDocValues);
     doc.otherDocs = [otherDoc];
 
@@ -3480,7 +3480,6 @@ describe('removeRelation', function(){
       foreignKey: String
     });
 
-    var otherName = util.s8();
     var OtherModel = thinky.createModel(modelNames[1], {
       id: String,
       str: String,
@@ -3491,7 +3490,7 @@ describe('removeRelation', function(){
     var docValues = {str: util.s8(), num: util.random()}
     var otherDocValues = {str: util.s8(), num: util.random()}
 
-    doc = new Model(docValues);
+    var doc = new Model(docValues);
     var otherDoc = new OtherModel(otherDocValues);
     doc.otherDoc = otherDoc;
 
@@ -3512,7 +3511,6 @@ describe('removeRelation', function(){
       num: Number
     });
 
-    var otherName = util.s8();
     var OtherModel = thinky.createModel(modelNames[1], {
       id: String,
       str: String,
@@ -3524,7 +3522,7 @@ describe('removeRelation', function(){
     var docValues = {str: util.s8(), num: util.random()}
     var otherDocValues = {str: util.s8(), num: util.random()}
 
-    doc = new Model(docValues);
+    var doc = new Model(docValues);
     var otherDoc = new OtherModel(otherDocValues);
     doc.otherDocs = [otherDoc];
 
