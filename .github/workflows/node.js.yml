@@ -28,6 +28,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: 'package-lock.json'
+    - run: apt update
+    - run: apt install gpg
     - run: wget -qO- https://download.rethinkdb.com/repository/raw/pubkey.gpg | \
            gpg --dearmor -o /usr/share/keyrings/rethinkdb-archive-keyrings.gpg
     - run: echo "deb [signed-by=/usr/share/keyrings/rethinkdb-archive-keyrings.gpg] https://download.rethinkdb.com/repository/ubuntu-$(lsb_release -cs) $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/rethinkdb.list
