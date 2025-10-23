@@ -29,9 +29,6 @@ jobs:
         cache: 'npm'
         cache-dependency-path: 'package-lock.json'
     - run: |
-        sudo apt-get update
-        sudo apt-get install wget gpg
-    - run: |
         wget -qO- https://download.rethinkdb.com/repository/raw/pubkey.gpg |
           sudo gpg --dearmor -o /usr/share/keyrings/rethinkdb-archive-keyrings.gpg
         echo "deb [signed-by=/usr/share/keyrings/rethinkdb-archive-keyrings.gpg] https://download.rethinkdb.com/repository/ubuntu-$(lsb_release -cs) $(lsb_release -cs) main" |
