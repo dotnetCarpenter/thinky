@@ -29,10 +29,10 @@ jobs:
         cache: 'npm'
         cache-dependency-path: 'package-lock.json'
     - run: wget -qO- https://download.rethinkdb.com/repository/raw/pubkey.gpg | \
-           sudo gpg --dearmor -o /usr/share/keyrings/rethinkdb-archive-keyrings.gpg
-    - run: echo "deb [signed-by=/usr/share/keyrings/rethinkdb-archive-keyrings.gpg] https://download.rethinkdb.com/repository/ubuntu-$(lsb_release -cs) $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
-    - run: sudo apt-get update
-    - run: sudo apt-get install rethinkdb
+           gpg --dearmor -o /usr/share/keyrings/rethinkdb-archive-keyrings.gpg
+    - run: echo "deb [signed-by=/usr/share/keyrings/rethinkdb-archive-keyrings.gpg] https://download.rethinkdb.com/repository/ubuntu-$(lsb_release -cs) $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/rethinkdb.list
+    - run: apt-get update
+    - run: apt-get install rethinkdb
     - run: rethinkdb --version
     - run: rethinkdb
     - run: npm ci
