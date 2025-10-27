@@ -26,7 +26,7 @@
   "dependencies":{
     "rethinkdbdash": "~2.3.31",
     "bluebird": "~2.10.2",
-    "validator": "~13.15.15"
+    "validator": "~13.15.20"
   },
   "devDependencies": {
     "mocha": "~11.7.4"
