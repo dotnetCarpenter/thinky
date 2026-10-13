@@ -110,6 +110,12 @@ No SLA, but a few developers hang out there and may be able to help:
 npm test
 ```
 
+If you want to use docker instead of installing rethink locally, you can use the following before `npm test`:
+
+```
+docker run -d --name rethinkdb -p 28015:28015 rethinkdb:latest
+```
+
 ### Contribute
 
 You are welcome to do a pull request.
