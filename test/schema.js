@@ -985,7 +985,7 @@ describe('Chainable types', function(){
     var Model = thinky.createModel(name,
       {id: type.buffer()},
       {init: false})
-    var doc = new Model({ id: new Buffer("foobar") });
+    var doc = new Model({ id: Buffer.from("foobar") });
     doc.validate();
   });
   it('Buffer - basic - valid buffer', function(){
@@ -2274,7 +2274,7 @@ describe('validate', function(){
 
     var doc = new Model({
       id: str,
-      field: new Buffer([1,2,3])
+      field: Buffer.from([1,2,3])
     })
 
     doc.validate();
@@ -2347,7 +2347,7 @@ describe('validate', function(){
 
     var doc = new Model({
       id: str,
-      field: {$reql_type$: "BINARY", data: (new Buffer("hello")).toString("base64") }
+      field: {$reql_type$: "BINARY", data: (Buffer.from("hello")).toString("base64") }
     })
 
     doc.validate();
