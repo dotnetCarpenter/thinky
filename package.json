@@ -1,6 +1,6 @@
 {
   "name": "thinky",
-  "version": "2.3.11",
+  "version": "2.4.0",
   "description": "RethinkDB ORM for Node.js",
   "main": "lib/thinky.js",
   "directories": {
@@ -12,22 +12,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/neumino/thinky"
+    "url": "git://github.com/dotnetcarpenter/thinky"
   },
   "keywords": [
     "rethinkdb",
     "orm"
   ],
   "author": "Michel Tu <orphee@gmail.com> (http://justonepixel.com/)",
+  "contributors": ["dotnetCarpenter <jon.ronnenberg+thinky@gmail.com>"],
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/neumino/thinky/issues"
+    "url": "https://github.com/dotnetcarpenter/thinky/issues"
   },
   "dependencies": {
-    "bluebird": "~2.10.2",
+    "bluebird": "~2.11.0",
     "rethinkdbdash": "~2.3.31",
-    "validator": "~13.15.20"
+    "validator": "^13.15.35"
   },
   "devDependencies": {
     "mocha": "^12.0.3"
