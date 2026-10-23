@@ -1,13 +1,13 @@
 {
   "name": "thinky",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "RethinkDB ORM for Node.js",
   "main": "lib/thinky.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "(rethinkdb --bind localhost:28015 &) && npm run test:unit",
+    "test": "(nc -z localhost 28015 || rethinkdb --daemon) && npm run test:unit",
     "test:unit": "mocha --check-leaks --timeout 20000 --require test/setup.js"
   },
   "repository": {
