@@ -113,7 +113,10 @@ npm test
 If you want to use docker instead of installing rethink locally, you can use the following before `npm test`:
 
 ```
+# install rethink docker image and name it rethinkdb
 docker run -d --name rethinkdb -p 28015:28015 rethinkdb:latest
+# start the rethinkdb container before runnung npm test
+docker start rethinkdb
 ```
 
 ### Contribute
